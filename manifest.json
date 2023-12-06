@@ -1,24 +1,19 @@
 {
-    "name": "Geolocation Progressive Web App",
-    "short_name": "geoloc-pwa",
+    "name": "projetorenato",
+    "short_name": "pwa tabacaria",
     "icons": [
         {
-            "src": "images/camera_128.png",
-            "sizes": "128x128",
-            "type": "image/png"
-        },
-        {
-            "src": "images/camera_256.png",
+            "src": "favicon.ico",
             "sizes": "256x256",
             "type": "image/png"
         },
         {
-            "src": "images/camera_512.png",
+            "src": "favicon.ico",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "images/camera_64.png",
+            "src": "favicon.ico",
             "sizes": "256x256",
             "type": "image/png",
             "purpose": "maskable"
@@ -30,4 +25,3 @@
     "background_color": "white",
     "theme_color": "white"
 }
-

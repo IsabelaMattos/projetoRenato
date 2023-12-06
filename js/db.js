@@ -4,42 +4,20 @@ let db;
 
 window.addEventListener('DOMContentLoaded', async event =>{
     criarDB();
-    document.getElementById('btnCadastrar').addEventListener('click', Cadastrarlocalizacao);
-    document.getElementById('btnCarregar').addEventListener('click', listar); 
-    
-    document.getElementById('btnDeletar').addEventListener('click', deletar);
+    document.getElementById('btnCadastrar').addEventListener('click', Cadastrar);
+    document.getElementById('btnCarregar').addEventListener('click', listar);
 });
 
-async function Cadastrarlocalizacao() {
-    let latitude = document.getElementById("latitude").value;
-    let longitude = document.getElementById("longitude").value;
-    let descricao = document.getElementById("descricao").value;
-    let horario = document.getElementById("horario").value;
-    let avaliacao = document.getElementById("avaliacao").value;
-    let endereco = document.getElementById("endereco").value;
-    const tx = await db.transaction('localizacao', 'readwrite');
-    const store = tx.objectStore('localizacao');
-    try{
-        await store.add({endereco: endereco,latitude: latitude, horario: horario, descricao: descricao, avaliacao: avaliacao, longitude:longitude});
-        await tx.done;
-        limparCampos();
-        alert('Anotação cadastrada com sucesso!')
-        console.log('Registro adicionado com sucesso!');
 
-    }catch (error) {
-        console.error('Erro ao Cadastrar registro:', error);
-        tx.abort();
-    }
-}
-async function criarDB() {
-    try{
+async function criarDB(){
+    try {
         db = await openDB('banco', 1, {
             upgrade(db, oldVersion, newVersion, transaction){
-                switch (oldVersion) {
+                switch  (oldVersion) {
                     case 0:
                     case 1:
                         const store = db.createObjectStore('localizacao', {
-                            keyPath: 'descricao'
+                            keyPath: 'nome'
                         });
                         store.createIndex('id', 'id');
                         listagem("banco de dados criado!");
@@ -51,6 +29,33 @@ async function criarDB() {
         listagem('Erro ao criar/abrir banco: ' + e.message);
     }
 }
+
+async function Cadastrar() {
+    let latitude = document.getElementById("latitude").value;
+    let longitude = document.getElementById("longitude").value;
+    let nome = document.getElementById("nome").value;
+    let hours = document.getElementById("hours").value;
+    let endereco = document.getElementById("endereco").value;
+    const tx = await db.transaction('localizacao', 'readwrite');
+    const store = tx.objectStore('localizacao');
+    try {
+        
+        await store.add({endereco: endereco,latitude: latitude,hours:hours, nome: nome, longitude:longitude });
+        await tx.done;
+        limpar();
+        alert('Local cadastrado com sucesso!')
+        console.log('Registro adicionado com sucesso!');
+      
+    } catch (error) {
+        console.error('Erro ao Cadastrar registro:', error);
+        tx.abort();
+    }
+}
+
+
+
+
+
 async function listar(){
     if(db == undefined){
         console.log("O banco de dados está fechado.");
@@ -59,63 +64,37 @@ async function listar(){
     const store = await tx.objectStore('localizacao');
     const lista = await store.getAll();
     if(lista){
-        const listar = lista.map(localizacao => {
+        const listar = lista.map(local => {
             return `<div class="listando">
-            
-            <p>Nome: ${localizacao.descricao}</p>
-            <p>Horário de Funcionamento: ${localizacao.horario}</p>
-            <p>Avaliação: ${localizacao.avaliacao}</p>
-            <p>Endereço: ${localizacao.endereco}</p>
-            <p>Localização</p>
-            <iframe id="mapinha" src="http://maps.google.com/maps?q=${localizacao.latitude},${localizacao.longitude}&z=16&output=embed" frameborder="0" scrolling="no" style="width: 300px; height: 300px;"></iframe>
-                            <style>.mapouter{position:relative;height:300px;width:300px;background:#fff;} .maprouter a{color:#fff !important;position:absolute !important;top:0 !important;z-index:0 !important;}</style>
-                            <style>.gmap_canvas{overflow:hidden;height:300px;width:300px}.gmap_canvas iframe{position:relative;z-index:2}</style>
-                   </div>`;
+                   
+                    <p>Nome: ${local.nome}</p>
+                    <p>Horario de funcionamento: ${local.hours} </p>
+                    <p>Endereço: ${local.endereco}</p>
+                    <iframe src="http://maps.google.com/maps?q=${local.latitude},${local.longitude}&z=16&output=embed" frameborder="0" scrolling="no" ></iframe>
+                            
+                    
+                 </div>`;
         });
         listagem(listar.join(' '));
-    }
+    } 
 }
-function limparCampos() {
+
+
+
+
+
+
+function limpar() {
     document.getElementById("latitude").value = '';
     document.getElementById("longitude").value = '';
-    document.getElementById("horario").value = '';
-    document.getElementById("descricao").value = '';
-    document.getElementById("avaliacao").value = '';
+    document.getElementById("hours").value = '';
+    document.getElementById("nome").value = '';
     document.getElementById("endereco").value = '';
 }
 
-const capturarLocalizacao = document.getElementById('localizacao');
 
-const sucesso = () => {
-    const iframe = document.getElementById('mapinha')
-    let lat, lon;
-    lat = latitude
-    lon = longitude
 
-    iframe.src = `http://maps.google.com/maps?q=${lat},${lon}&z=16&output=embed`
-};
-
-const erro = (error) => {
-    let errorMessage;
-    switch(error.code){
-        case 0:
-        errorMessage = "Erro desconhecido"
-        break;
-        case 1:
-        errorMessage = "Permissão negada!"
-        break;
-        case 2:
-        errorMessage = "Captura de posição indisponível!"
-        break;
-        case 3:
-        errorMessage = "Tempo de solicitação excedido!"
-        break;
-    }
-    console.log('Ocorreu um error: ' + errorMessage);
-};
-capturarLocalizacao.addEventListener('click', () => {
-    navigator.geolocation.watchPosition(sucesso, erro);
-});
 function listagem(text){
-    document.getElementById('informacao').innerHTML = text;
+    document.getElementById('info').innerHTML = text;
 }
+

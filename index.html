@@ -2,39 +2,40 @@
 <html lang="pt">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PWA Geolocation - Tabacaria</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="/images/icon-256_ios.png">
-  <link rel="icon" href="/images/camera_256.png" sizes="256x256" />
-  <meta name="theme-color" content="white" />
+  <meta name="description" content="exemplo de fallback">
+    <title>pwa tabacarial</title>
+    <link rel="apple-touch-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/style.css" />
+    <!--viewport para designers responsivos (mobo), content é a configuração-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="white" />
+    <link rel="manifest" href="manifest.json" />
+    
+    <link rel="icon" href="favicon.ico">
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/db.js"></script>
 </head>
 <body>
   <section class="container">
     <div class="header">
     <header class="aaa">
-      <img src="tabacaria.jpg">
+      
     </header>
     <main role="main">
     <div class="save">
       <center>
         <h1>TABACARIA</h1>
-        <input type="text" id="descricao" placeholder="Nome"><br/>
+        <input type="text" id="nome" placeholder="Nome"><br/>
+        <input type="text" id="endereco" placeholder="Endereco"><br/>
         <input type="text" id="latitude" placeholder="Latitude"><br/>
-        <p>-22.244722</p>
         <input type="text" id="longitude" placeholder="Longitude"><br/>
-        <p>-53.345250</p>
-        <input type="text" id="endereco" placeholder="Endereço"><br/>
-        <input type="text" id="hours" placeholder="Horário de Funcionamento"><br/>
-        <input type="text" id="assess" placeholder="Avaliação"><br/>
 
-        <button id="btnCadastrar">Cadastrar Local</button><br/>
-        <button id="btnCarregar">Listar Locais</button><br/>
+        <input type="text" id="hours" placeholder="Horario de Funcionamento"><br/>
+
+        <button id="btnCadastrar">Cadastrar</button><br/>
+        <button id="btnCarregar">Listar</button><br/>
         <div id="pgr"></div>
-        <div id="information"></div><br/>
+        <div id="info"></div><br/>
       </div></div>
         </center>
       </div></div>
