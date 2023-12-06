@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PWA Geolocation - Capturando a Localização</title>
+  <title>PWA Geolocation - Tabacaria</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="/images/icon-256_ios.png">
@@ -14,30 +14,38 @@
 </head>
 <body>
   <section class="container">
-    <header class="cabecalho">
-      <h1 class="titulo">Geolocation - Tabacaria</h1>
-    </header>  
-    <link rel="icon" href="/images/tabacaria.jpg" />
-    <div class="conteudo">
-      <header class="cabecalhoConteudo">
-        <h2>Geolocalização</h2>
-      </header>
-      <div class="conteudoLocalizacao">
-        <p>
-          Latitude: <span id="latitude">0.0</span>
-        </p>
-        <p>
-          Longitude: <span id="longitude">0.0</span>
-        </p>
-        <div>
-          <button class="botao" id="localizacao">Capturar Localização</button>
-        </div>
-      </div>
+    <div class="header">
+    <header class="aaa">
+      <img src="tabacaria.jpg">
+    </header>
+    <main role="main">
+    <div class="save">
+      <center>
+        <h1>TABACARIA</h1>
+        <input type="text" id="descricao" placeholder="Nome"><br/>
+        <input type="text" id="latitude" placeholder="Latitude"><br/>
+        <p>-22.244722</p>
+        <input type="text" id="longitude" placeholder="Longitude"><br/>
+        <p>-53.345250</p>
+        <input type="text" id="endereco" placeholder="Endereço"><br/>
+        <input type="text" id="hours" placeholder="Horário de Funcionamento"><br/>
+        <input type="text" id="assess" placeholder="Avaliação"><br/>
+
+        <button id="btnCadastrar">Cadastrar Local</button><br/>
+        <button id="btnCarregar">Listar Locais</button><br/>
+        <div id="pgr"></div>
+        <div id="information"></div><br/>
+      </div></div>
+        </center>
+      </div></div>
     </div>
-    <footer class="rodape">
-      Progressive Web Application - Geolocation
-    </footer>  
+  </main>
+</div><br/>
+<div></div>
+</div>
+</div>
+</div>
+</div>
   </section>
-  <script src="js/main.js"></script>
 </body>
 </html>

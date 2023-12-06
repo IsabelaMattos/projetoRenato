@@ -1,4 +1,4 @@
-import { warmStrategyCache } from 'workbox-recipes';
+import { offlineFallback, warmStrategyCache } from 'workbox-recipes';
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { registerRoute, Route } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
@@ -6,7 +6,7 @@ import { ExpirationPlugin } from 'workbox-expiration';
 
 // configurando o cache
 const pageCache = new CacheFirst({
-  cacheName: 'pwa-geoloc-cache',
+  cacheName: 'tobacconist',
   plugins: [
     new CacheableResponsePlugin({
       statuses: [0, 200],
@@ -27,8 +27,7 @@ registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
 
 registerRoute(// configurando cache de assets
-  ({ request }) => ['style', 'script', 'worker']
-    .includes(request.destination),
+  ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
   new StaleWhileRevalidate({
     cacheName: 'asset-cache',
     plugins: [
